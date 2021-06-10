@@ -52,7 +52,7 @@ const SignUpModal = () => {
           setPasswordNotMatch(true);
         } else setPasswordNotMatch(false);
 
-        dispatch(register);
+        dispatch(register(username, email, password, passwordCheck));
         
       } catch (err) {
           console.log(err);

@@ -41,13 +41,13 @@ export const userLoginReducer = (state = {}, action) => {
     }
 }
 
-export const userInfoReducer = (state = {userInfo:''}, action) => {
+export const userInfoReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_INFO_REQUEST:
-            return { loading: true }
+            return { loading: true, userInfo:'', success: false }
         
         case USER_INFO_SUCCESS:
-            return { loading: false, userInfo: action.payload }
+            return { loading: false, userInfo: action.payload, success: true }
 
         case USER_INFO_FAIL:     
             return { loading: false, error: action.payload }

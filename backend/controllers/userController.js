@@ -39,12 +39,7 @@ const register = asyncHandler(async (req,res) => {
 
     
     if (savedUser) {
-        res.status(201).json({
-            _id: user._id,
-            username: user.username,
-            email: user.email,
-            isAdmin: user.isAdmin,
-        })
+        res.json([savedUser.username, savedUser._id])
     } else {
         res.status(400)
         throw new Error('Invalid User Data')

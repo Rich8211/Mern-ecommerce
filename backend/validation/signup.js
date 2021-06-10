@@ -4,7 +4,7 @@ const Validator = require("validator");
 const validatedSignUpInput = (data) => {
     let errors = {};
 
-    let {email, password} = data;
+    let {email, password, username} = data;
 
     username = !isEmpty(username) ? username : "";
     email = !isEmpty(email) ? email : "";
@@ -14,6 +14,10 @@ const validatedSignUpInput = (data) => {
         errors.email = "Email is required";
     } else if (!Validator.isEmail(email)) {
         errors.email = "Enter a valid email";
+    }
+
+    if (Validator.isEmpty(username)) {
+        errors.username = "Username is required";
     }
 
     if (Validator.isEmpty(password)) {

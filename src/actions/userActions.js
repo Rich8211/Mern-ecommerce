@@ -11,7 +11,7 @@ import {
     USER_INFO_FAIL
 } from '../constants/userConstants';
 
-export const register = (username, email, password) => async (dispatch) => {
+export const register = (username, email, password, passwordCheck) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST
@@ -24,15 +24,15 @@ export const register = (username, email, password) => async (dispatch) => {
             withCredentials: true
         }
 
-        await axios.post('/api/users', {username, email, password}, config)
+        await axios.post('http://localhost:5000/api/users', {username, email, password, passwordCheck}, config)
 
         dispatch({
             type: USER_REGISTER_SUCCESS
         })
 
-        await axios.post('/api/users/login', {email, password}, config)
+        await axios.post('http://localhost:5000/api/users/login', {email, password}, config)
 
-        const { data } = await axios.get('/api/users/user', config )
+        const { data } = await axios.get('http://localhost:5000/api/users/user', config )
 
         dispatch({
             type: USER_LOGIN_SUCCESS,
@@ -67,10 +67,10 @@ export const login = (email, password) => async (dispatch) =>  {
             withCredentials: true
         }
 
-        const {data: successLogin} = await axios.post('/api/users/login', {email, password}, config)
+        const {data: successLogin} = await axios.post('http://localhost:5000/api/users/login', {email, password}, config)
 
         if (successLogin) {
-            const { data: userData } = await axios.get('/api/users/user', config )
+            const { data: userData } = await axios.get('http://localhost:5000/api/users/user', config )
             dispatch({
                 type: USER_LOGIN_SUCCESS,
                 payload: successLogin
@@ -104,7 +104,9 @@ export const getInfo = () => async (dispatch) => {
             withCredentials: true
         }
 
-        const { data } = axios.get('/api/user/user', config);
+        const { data } = axios.get('http://localhost:5000/api/users/user', config);
+
+        // console.log(data);
 
         if (data) {
             dispatch({

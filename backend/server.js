@@ -25,8 +25,6 @@ require('./middleware/passport')(passport);
 
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json())
-
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 

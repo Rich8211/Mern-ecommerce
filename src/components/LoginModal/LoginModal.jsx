@@ -14,11 +14,11 @@ const LoginModal = () => {
 
     const user = useSelector(state => state.user);
 
-    const { userInfo } = user;
+    const { userInfo, success:userInfoSucces } = user;
 
     const userLogin = useSelector(state => state.userLogin)
 
-    const {loading, error, success} = userLogin;
+    const {loading, error, success: userLoginSuccess} = userLogin;
 
     const [failedLogin, setFailedLogin] = useState(false);
     const [missingFields, setMissingFields] = useState(false);
@@ -64,14 +64,16 @@ const LoginModal = () => {
         
     }
 
+    // console.log(userInfoSucces)
+
     useEffect(() => {
-        if (success) {
+        if (userLoginSuccess) {
             dispatch(getInfo())
         }
         if (userInfo) {
             setModal('')
         }
-    }, [success, dispatch, userInfo, setModal])
+    }, [userLoginSuccess, dispatch, userInfo, setModal])
 
     useEffect(() => {
         
