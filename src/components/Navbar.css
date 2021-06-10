@@ -1,0 +1,26 @@
+.navbar {
+    width: 100%;
+    position: 'absolute';
+    top: 0;
+    height: 50px;
+    background-color: #000;
+    color: #fff;
+}
+
+.navbar-account-items {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+
+.navbar-account-items i {
+    margin-right:5%;
+    cursor: pointer;
+
+}
+
+.navbar-account-items p {
+    margin-right:5%;
+    cursor: pointer;
+}

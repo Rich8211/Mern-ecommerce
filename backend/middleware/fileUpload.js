@@ -1,0 +1,44 @@
+const aws = require('aws-sdk');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const awsConfig = require('aws-config');
+
+require("dotenv").config();
+
+const s3 = new aws.S3(
+    awsConfig({
+        accessKeyId: process.env.S3_ACCESS_KEY,
+        secretAccessKey: process.env.S3_ACCESS_SECRET,
+        region:'us-east-1'
+    })
+)
+
+const storage = multerS3({
+    acl:'public-read',
+    s3,
+    bucket: 'my-ecommerce-product-images',
+    key: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname)
+    },
+    metadata: function(req, file, cb) {
+        cb(null, {fieldName: file.originalname});
+     }
+})
+
+const upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        if (
+            file.mimetype === 'image/png' ||
+            file.mimetype === 'image/jpg' ||
+            file.mimetype === 'image/jpeg'
+        ) {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            return cb(new Error('Only .png, .jpg and jpeg format allowed'))
+        }
+    }
+});
+
+module.exports = upload;
