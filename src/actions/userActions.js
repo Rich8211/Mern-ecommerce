@@ -69,6 +69,7 @@ export const login = (email, password) => async (dispatch) =>  {
 
         const {data: successLogin} = await axios.post('http://localhost:5000/api/users/login', {email, password}, config)
 
+        
         if (successLogin) {
             const { data: userData } = await axios.get('http://localhost:5000/api/users/user', config )
             dispatch({
@@ -104,9 +105,7 @@ export const getInfo = () => async (dispatch) => {
             withCredentials: true
         }
 
-        const { data } = axios.get('http://localhost:5000/api/users/user', config);
-
-        // console.log(data);
+        const { data } = await axios.get('http://localhost:5000/api/users/user', config )
 
         if (data) {
             dispatch({

@@ -17,9 +17,9 @@ function App() {
   const user = useSelector(state => state.user);
   const { loading, userInfo, error } = user;
   
-  // useEffect(() => {
-  //   console.log(userInfo)
-  // },[userInfo])
+  useEffect(() => {
+    console.log(userInfo)
+  },[userInfo])
 
   useEffect(() => {
     dispatch(getInfo())

@@ -68,11 +68,11 @@ const LoginModal = () => {
 
     useEffect(() => {
         if (userLoginSuccess) {
-            dispatch(getInfo())
+            if (userInfo) {
+                setModal('')
+            }
         }
-        if (userInfo) {
-            setModal('')
-        }
+        
     }, [userLoginSuccess, dispatch, userInfo, setModal])
 
     useEffect(() => {
